@@ -14,14 +14,14 @@ extension AllSectionsEntity {
 extension SectionEntity {
     init(dto: SectionDTO) {
         self.name = dto.name
-        self.type = dto.type
+        self.displayStyle = ContentDisplayType(rawValue: dto.type) ?? .none
         self.contentType = dto.contentType
         self.order = dto.order
-        self.content = dto.content.map { ContentEntity(dto: $0) }
+        self.content = dto.content.map { ContentEntityType(dto: $0) }
     }
 }
 
-extension ContentEntity {
+extension ContentEntityType {
     init(dto: ContentDTO) {
         switch dto {
         case .podcast(let podcast):

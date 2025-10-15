@@ -7,63 +7,41 @@
 
 import Foundation
 
-struct AllSectionsEntity: Codable {
+struct AllSectionsEntity {
     var sections: [SectionEntity]
 }
 
-struct SectionEntity: Codable, Identifiable {
+struct SectionEntity: Identifiable {
     var id = UUID()
     var name: String
-    var type: String
+    var displayStyle: ContentDisplayType
     var contentType: String
     var order: Int
-    var content: [ContentEntity]
+    var content: [ContentEntityType]
 }
 
-enum ContentEntity: Codable, Identifiable {
-    case podcast(PodcastEntity)
-    case episode(EpisodeEntity)
-    case audiobook(AudiobookEntity)
-    case article(AudioArticleEntity)
+enum ContentDisplayType: String {
+    case square
+    case twoLinesGrid = "2_lines_grid"
+    case bigSquare
+    case queue
+    case none
     
-    var id: String {
-        switch self {
-        case .podcast(let p): return p.podcastID
-        case .episode(let e): return e.episodeID
-        case .audiobook(let a): return a.audiobookID
-        case .article(let a): return a.articleID
-        }
-    }
-    
-    // MARK: Codable
     init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let podcast = try? container.decode(PodcastEntity.self) {
-            self = .podcast(podcast)
-        } else if let episode = try? container.decode(EpisodeEntity.self) {
-            self = .episode(episode)
-        } else if let audiobook = try? container.decode(AudiobookEntity.self) {
-            self = .audiobook(audiobook)
-        } else if let article = try? container.decode(AudioArticleEntity.self) {
-            self = .article(article)
-        } else {
-            throw DecodingError.typeMismatch(
-                ContentEntity.self,
-                DecodingError.Context(
-                    codingPath: decoder.codingPath,
-                    debugDescription: "Unknown content type"
+        let rawValue = try decoder.singleValueContainer().decode(String.self)
+        switch rawValue {
+        case "big_square", "big square":
+            self = .bigSquare
+        default:
+            if let value = ContentDisplayType(rawValue: rawValue) {
+                self = value
+            } else {
+                self = .none
+                throw DecodingError.dataCorruptedError(
+                    in: try decoder.singleValueContainer(),
+                    debugDescription: "Invalid Content Display Type: \(rawValue)"
                 )
-            )
-        }
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .podcast(let p): try container.encode(p)
-        case .episode(let e): try container.encode(e)
-        case .audiobook(let a): try container.encode(a)
-        case .article(let a): try container.encode(a)
+            }
         }
     }
 }
