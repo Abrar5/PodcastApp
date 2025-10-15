@@ -20,32 +20,6 @@ struct SectionEntity: Identifiable {
     var content: [ContentEntityType]
 }
 
-enum ContentDisplayType: String {
-    case square
-    case twoLinesGrid = "2_lines_grid"
-    case bigSquare
-    case queue
-    case none
-    
-    init(from decoder: Decoder) throws {
-        let rawValue = try decoder.singleValueContainer().decode(String.self)
-        switch rawValue {
-        case "big_square", "big square":
-            self = .bigSquare
-        default:
-            if let value = ContentDisplayType(rawValue: rawValue) {
-                self = value
-            } else {
-                self = .none
-                throw DecodingError.dataCorruptedError(
-                    in: try decoder.singleValueContainer(),
-                    debugDescription: "Invalid Content Display Type: \(rawValue)"
-                )
-            }
-        }
-    }
-}
-
 // MARK: - Podcast
 struct PodcastEntity: Codable {
     let podcastID, name, description: String
