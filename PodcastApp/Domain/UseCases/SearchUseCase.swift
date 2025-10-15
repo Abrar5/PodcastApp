@@ -14,7 +14,7 @@ class SearchUseCase {
     init(query: String) {
         self.query = query
     }
-    func execute() async throws -> SearchResponse {
+    func execute() async throws -> AllSectionsEntity {
         return try await repository.search(query: query)
     }
 }

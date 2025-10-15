@@ -1,13 +1,11 @@
 //
-//  SearchResponse.swift
+//  SearchEntity.swift
 //  PodcastApp
 //
 //  Created by Abrar on 15/10/2025.
 //
 
-import Foundation
-
-struct SearchResponse: Decodable {
+struct SearchEntity: Decodable {
     let sections: [SectionResponse]
 }
 

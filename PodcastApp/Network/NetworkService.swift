@@ -33,6 +33,7 @@ final class APIClient {
         }
         
         var request = URLRequest(url: url)
+        print("✅ URL:", request)
         request.httpMethod = target.method.rawValue
         target.headers?.forEach { request.setValue($1, forHTTPHeaderField: $0) }
       

@@ -8,6 +8,6 @@
 import Foundation
 
 protocol PodcastRepository {
-    func fetchHomeSections() async throws -> HomeResponse
-    func search(query: String) async throws -> SearchResponse 
+    func fetchHomeSections() async throws -> AllSectionsEntity
+    func search(query: String) async throws -> AllSectionsEntity
 }

@@ -10,7 +10,7 @@ import Foundation
 class FetchHomeSectoinsUseCase {
     private let repository = PodacstRepositoryImplementation()
     
-    func execute() async throws -> HomeResponse {
+    func execute() async throws -> AllSectionsEntity {
         return try await repository.fetchHomeSections()
     }
 }
