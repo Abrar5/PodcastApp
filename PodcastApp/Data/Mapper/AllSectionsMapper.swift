@@ -5,6 +5,8 @@
 //  Created by Abrar on 15/10/2025.
 //
 
+import Foundation
+
 extension AllSectionsEntity {
     init(dto: AllSectionsDTO) {
         self.sections = dto.sections.compactMap { SectionEntity(dto: $0)}
@@ -18,6 +20,59 @@ extension SectionEntity {
         self.contentType = dto.contentType
         self.order = dto.order
         self.content = dto.content.map { ContentEntityType(dto: $0) }
+        self.viewableContent = dto.content.map { ViewableContent(dto: $0) }
+    }
+}
+
+extension ViewableContent {
+    init(dto: ContentDTO) {
+        switch dto {
+        case .podcast(let podcast):
+            self.imageUrl = podcast.avatarURL
+            self.name = podcast.name
+            duration = formatDuration(seconds: podcast.duration)
+            releaseDate = ""
+            episodeCount = podcast.episodeCount.description
+            
+        case .episode(let episode):
+            imageUrl = episode.avatarURL
+            name = episode.name
+            duration = formatDuration(seconds: episode.duration)
+            releaseDate = episode.releaseDate
+            episodeCount = ""
+            
+        case .audiobook(let audiobook):
+            imageUrl = audiobook.avatarURL
+            name = audiobook.name
+            duration = formatDuration(seconds: audiobook.duration)
+            releaseDate = audiobook.releaseDate
+            episodeCount = ""
+            
+        case .article(let article):
+            imageUrl = article.avatarURL
+            name = article.name
+            duration = formatDuration(seconds: article.duration)
+            releaseDate = article.releaseDate
+            episodeCount = ""
+        }
+    }
+    
+    func formatDuration(seconds: Int) -> String {
+        guard seconds > 0 else { return "0 min" }
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .short
+        formatter.zeroFormattingBehavior = .dropAll
+        
+        if let formattedString = formatter.string(from: TimeInterval(seconds)) {
+            return formattedString
+                .replacingOccurrences(of: "hr", with: "h")
+                .replacingOccurrences(of: "min", with: "m")
+                .replacingOccurrences(of: "sec", with: "s")
+        }
+        
+        return ""
     }
 }
 

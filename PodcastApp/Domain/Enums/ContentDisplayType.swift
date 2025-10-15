@@ -8,15 +8,16 @@
 enum ContentDisplayType: String {
     case square
     case twoLinesGrid = "2_lines_grid"
-    case bigSquare
+    case bigSquare = "big square"
+    case big_Square = "big_square"
     case queue
     case none
     
     init(from decoder: Decoder) throws {
         let rawValue = try decoder.singleValueContainer().decode(String.self)
         switch rawValue {
-        case "big_square", "big square":
-            self = .bigSquare
+//        case "big_square", "big square":
+//            self = .bigSquare
         default:
             if let value = ContentDisplayType(rawValue: rawValue) {
                 self = value

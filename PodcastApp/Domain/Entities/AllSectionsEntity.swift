@@ -18,6 +18,16 @@ struct SectionEntity: Identifiable {
     var contentType: String
     var order: Int
     var content: [ContentEntityType]
+    var viewableContent: [ViewableContent]
+}
+
+struct ViewableContent: Identifiable {
+    var id = UUID()
+    var imageUrl: String = ""
+    var name: String = ""
+    var duration: String = ""
+    var releaseDate: String = ""
+    var episodeCount: String = ""
 }
 
 // MARK: - Podcast
