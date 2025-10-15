@@ -22,19 +22,9 @@ struct HomeView: View {
         .padding()
         .background(.black)
         .onAppear() {
-            
-            //            for familyName in UIFont.familyNames {
-            //                print(familyName)
-            //
-            //                for fontName in UIFont.fontNames(forFamilyName: familyName) {
-            //                    print("---\(fontName)")
-            //                }
-            //            }
-            
-                                    Task {
-                                        await viewModel.getHomeSections()
-//                                        await viewModel.getSearch(query: "abc")
-                                    }
+            Task {
+                await viewModel.getHomeSections()
+            }
         }
     }
     
@@ -116,5 +106,3 @@ struct HomeView: View {
         }
     }
 }
-
-
