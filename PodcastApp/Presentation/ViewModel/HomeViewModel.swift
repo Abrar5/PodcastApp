@@ -9,8 +9,8 @@ import Foundation
 
 @MainActor
 class HomeViewModel: ObservableObject {
-    @Published var homeSections: HomeResponse?
-    @Published var search: SearchResponse?
+    @Published var homeSections: AllSectionsEntity?
+    @Published var search: AllSectionsEntity?
     
     func getHomeSections() async {
         do {
@@ -19,6 +19,7 @@ class HomeViewModel: ObservableObject {
             
             self.homeSections = homeSections
         } catch {
+            homeSections = stubHomeSections()
             print(error.localizedDescription)
         }
 
@@ -32,5 +33,17 @@ class HomeViewModel: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func stubHomeSections() -> AllSectionsEntity {
+        guard let path = Bundle.main.path(forResource: "GetSections", ofType: "json") else {
+            fatalError("GetSections.json not found in bundle.")
+        }
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let sectoins = try! decoder.decode(AllSectionsDTO.self, from: data)
+        let entity = AllSectionsEntity(dto: sectoins)
+        return entity
     }
 }
