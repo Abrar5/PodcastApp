@@ -13,11 +13,21 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            headerView
-            filterView
-                .padding([.top, .bottom], 16)
-            sectionsView
-            Spacer()
+            switch viewModel.homeLoadingType {
+            case .loading:
+                ProgressView()
+            case .done:
+                headerView
+                filterView
+                    .padding([.top, .bottom], 16)
+                sectionsView
+                Spacer()
+            case .empty:
+                Text("No data found")
+                    .foregroundColor(.white)
+            default:
+                EmptyView()
+            }
         }
         .padding()
         .background(.black)

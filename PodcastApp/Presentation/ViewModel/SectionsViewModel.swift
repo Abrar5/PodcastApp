@@ -11,19 +11,24 @@ import Foundation
 class SectionsViewModel: ObservableObject {
     @Published var homeSections: AllSectionsEntity?
     @Published var search: SearchEntity?
-    @Published var isLoadingHome: Bool = false
+    @Published var homeLoadingType: LoadingType = .none
     @Published var searchLoadingType: LoadingType = .none
     
     func getHomeSections() async {
-        isLoadingHome = true
+        homeLoadingType = .loading
         do {
             let homeSections = try await FetchHomeSectoinsUseCase().execute()
             print("-- \(homeSections)")
             self.homeSections = homeSections
-            isLoadingHome = false
+            if homeSections.sections.count == 0 {
+                homeLoadingType = .empty
+            } else {
+                homeLoadingType = .done
+            }
         } catch {
             homeSections = stubHomeSections()
             print(error.localizedDescription)
+            homeLoadingType = .done
         }
     }
     

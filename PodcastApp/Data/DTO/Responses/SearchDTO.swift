@@ -39,7 +39,7 @@ struct SearchContentDTO: Codable {
     enum CodingKeys: String, CodingKey {
         case podcastID = "podcast_id"
         case avatarURL = "avatar_url"
-        case episodeCount = "episode_count"
+        case episodeCount = "episode_count"        
         case name, description, duration, language, priority, popularityScore, score
     }
 }
