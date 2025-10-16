@@ -15,12 +15,12 @@ extension AllSectionsEntity {
 
 extension SectionEntity {
     init(dto: SectionDTO) {
-        self.name = dto.name
-        self.displayStyle = ContentDisplayType(rawValue: dto.type) ?? .none
-        self.contentType = dto.contentType
-        self.order = dto.order
-        self.content = dto.content.map { ContentEntityType(dto: $0) }
-        self.viewableContent = dto.content.map { ViewableContent(dto: $0) }
+        self.name = dto.name ?? ""
+        self.displayStyle = ContentDisplayType(rawValue: dto.type ?? "") ?? .none
+        self.contentType = dto.contentType ?? ""
+        self.order = dto.order ?? 0
+        self.content = dto.content?.map { ContentEntityType(dto: $0) } ?? []
+        self.viewableContent = dto.content?.map { ViewableContent(dto: $0) } ?? []
     }
 }
 
@@ -28,34 +28,34 @@ extension ViewableContent {
     init(dto: ContentDTO) {
         switch dto {
         case .podcast(let podcast):
-            self.imageUrl = podcast.avatarURL
-            self.name = podcast.name
-            self.description = podcast.description
-            self.duration = formatDuration(seconds: podcast.duration)
+            self.imageUrl = podcast.avatarURL ?? ""
+            self.name = podcast.name ?? ""
+            self.description = podcast.description ?? ""
+            self.duration = formatDuration(seconds: podcast.duration ?? 0)
             self.releaseDate = ""
-            self.episodeCount = podcast.episodeCount.description
+            self.episodeCount = podcast.episodeCount?.description ?? ""
             
         case .episode(let episode):
-            self.imageUrl = episode.avatarURL
-            self.name = episode.name
-            self.description = episode.description
-            self.duration = formatDuration(seconds: episode.duration)
-            self.releaseDate = episode.releaseDate
+            self.imageUrl = episode.avatarURL ?? ""
+            self.name = episode.name ?? ""
+            self.description = episode.description ?? ""
+            self.duration = formatDuration(seconds: episode.duration ?? 0)
+            self.releaseDate = episode.releaseDate ?? ""
             self.episodeCount = ""
             
         case .audiobook(let audiobook):
-            self.imageUrl = audiobook.avatarURL
-            self.name = audiobook.name
-            self.description = audiobook.description
-            self.duration = formatDuration(seconds: audiobook.duration)
-            self.releaseDate = audiobook.releaseDate
+            self.imageUrl = audiobook.avatarURL ?? ""
+            self.name = audiobook.name ?? ""
+            self.description = audiobook.description ?? ""
+            self.duration = formatDuration(seconds: audiobook.duration ?? 0)
+            self.releaseDate = audiobook.releaseDate ?? ""
             self.episodeCount = ""
         case .article(let article):
-            self.imageUrl = article.avatarURL
-            self.name = article.name
-            self.description = article.description
-            self.duration = formatDuration(seconds: article.duration)
-            self.releaseDate = article.releaseDate
+            self.imageUrl = article.avatarURL ?? ""
+            self.name = article.name ?? ""
+            self.description = article.description ?? ""
+            self.duration = formatDuration(seconds: article.duration ?? 0)
+            self.releaseDate = article.releaseDate ?? ""
             self.episodeCount = ""
         }
     }
@@ -96,75 +96,75 @@ extension ContentEntityType {
 
 extension PodcastEntity {
     init(dto: PodcastDTO) {
-        self.podcastID = dto.podcastID
-        self.name = dto.name
-        self.description = dto.description
-        self.avatarURL = dto.avatarURL
-        self.episodeCount = dto.episodeCount
-        self.duration = dto.duration
+        self.podcastID = dto.podcastID ?? ""
+        self.name = dto.name ?? ""
+        self.description = dto.description ?? ""
+        self.avatarURL = dto.avatarURL ?? ""
+        self.episodeCount = dto.episodeCount ?? 0
+        self.duration = dto.duration ?? 0
         self.language = dto.language
-        self.priority = dto.priority
-        self.popularityScore = dto.popularityScore
-        self.score = dto.score
+        self.priority = dto.priority ?? 0
+        self.popularityScore = dto.popularityScore ?? 0
+        self.score = dto.score ?? 0
     }
 }
 
 extension EpisodeEntity {
     init(dto: EpisodeDTO) {
-        self.podcastPopularityScore = dto.podcastPopularityScore
-        self.podcastPriority = dto.podcastPriority
-        self.episodeID = dto.episodeID
-        self.name = dto.name
+        self.podcastPopularityScore = dto.podcastPopularityScore ?? 0
+        self.podcastPriority = dto.podcastPriority ?? 0
+        self.episodeID = dto.episodeID ?? ""
+        self.name = dto.name ?? ""
         self.seasonNumber = dto.seasonNumber
-        self.episodeType = dto.episodeType
-        self.podcastName = dto.podcastName
-        self.authorName = dto.authorName
-        self.description = dto.description
+        self.episodeType = dto.episodeType ?? ""
+        self.podcastName = dto.podcastName ?? ""
+        self.authorName = dto.authorName ?? ""
+        self.description = dto.description ?? ""
         self.number = dto.number
-        self.duration = dto.duration
-        self.avatarURL = dto.avatarURL
-        self.separatedAudioURL = dto.separatedAudioURL
-        self.audioURL = dto.audioURL
-        self.releaseDate = dto.releaseDate
-        self.podcastID = dto.podcastID
-        self.chapters = dto.chapters
-        self.paidIsEarlyAccess = dto.paidIsEarlyAccess
-        self.paidIsNowEarlyAccess = dto.paidIsNowEarlyAccess
-        self.paidIsExclusive = dto.paidIsExclusive
+        self.duration = dto.duration ?? 0
+        self.avatarURL = dto.avatarURL ?? ""
+        self.separatedAudioURL = dto.separatedAudioURL ?? ""
+        self.audioURL = dto.audioURL ?? ""
+        self.releaseDate = dto.releaseDate ?? ""
+        self.podcastID = dto.podcastID ?? ""
+        self.chapters = dto.chapters ?? []
+        self.paidIsEarlyAccess = dto.paidIsEarlyAccess ?? false
+        self.paidIsNowEarlyAccess = dto.paidIsNowEarlyAccess ?? false
+        self.paidIsExclusive = dto.paidIsExclusive ?? false
         self.paidTranscriptURL = dto.paidTranscriptURL
         self.freeTranscriptURL = dto.freeTranscriptURL
-        self.paidIsExclusivePartially = dto.paidIsExclusivePartially
-        self.paidExclusiveStartTime = dto.paidExclusiveStartTime
+        self.paidIsExclusivePartially = dto.paidIsExclusivePartially ?? false
+        self.paidExclusiveStartTime = dto.paidExclusiveStartTime ?? 0
         self.paidEarlyAccessDate = dto.paidEarlyAccessDate
         self.paidEarlyAccessAudioURL = dto.paidEarlyAccessAudioURL
         self.paidExclusivityType = dto.paidExclusivityType
-        self.score = dto.score
+        self.score = dto.score ?? 0
     }
 }
 
 extension AudiobookEntity {
     init(dto: AudiobookDTO) {
-        self.audiobookID = dto.audiobookID
-        self.name = dto.name
-        self.authorName = dto.authorName
-        self.description = dto.description
-        self.avatarURL = dto.avatarURL
-        self.duration = dto.duration
+        self.audiobookID = dto.audiobookID ?? ""
+        self.name = dto.name ?? ""
+        self.authorName = dto.authorName ?? ""
+        self.description = dto.description ?? ""
+        self.avatarURL = dto.avatarURL ?? ""
+        self.duration = dto.duration ?? 0
         self.language = dto.language
-        self.releaseDate = dto.releaseDate
-        self.score = dto.score
+        self.releaseDate = dto.releaseDate ?? ""
+        self.score = dto.score ?? 0
     }
 }
 
 extension AudioArticleEntity {
     init(dto: AudioArticleDTO) {
-        self.articleID = dto.articleID
-        self.name = dto.name
-        self.authorName = dto.authorName
-        self.description = dto.description
-        self.avatarURL = dto.avatarURL
-        self.duration = dto.duration
-        self.releaseDate = dto.releaseDate
-        self.score = dto.score
+        self.articleID = dto.articleID ?? ""
+        self.name = dto.name ?? ""
+        self.authorName = dto.authorName ?? ""
+        self.description = dto.description ?? ""
+        self.avatarURL = dto.avatarURL ?? ""
+        self.duration = dto.duration ?? 0
+        self.releaseDate = dto.releaseDate ?? ""
+        self.score = dto.score ?? 0
     }
 }

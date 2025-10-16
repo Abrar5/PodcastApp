@@ -21,11 +21,9 @@ final class APIClient {
         config.timeoutIntervalForResource = 60
         config.waitsForConnectivity = true
         self.session = URLSession(configuration: config)
-        
     }
     
     func request<T: Decodable>(_ target: NetworkTarget, responseType: T.Type) async throws -> T {
-        
         
         let urlString = target.baseURL + target.path
         guard let url = URL(string: urlString) else {
@@ -47,8 +45,8 @@ final class APIClient {
         }
         
         let jsonString = String(data: data, encoding: .utf8) ?? "nil"
-        print("✅ Raw response data:\n", jsonString)
-        
+        print("✅ JSON Response:\n\(jsonString)")
+
         guard let httpResponse = response as? HTTPURLResponse,
               (200..<300).contains(httpResponse.statusCode) else {
             throw URLError(.badServerResponse)
@@ -61,7 +59,6 @@ final class APIClient {
             return try decoder.decode(T.self, from: data)
         } catch {
             print("❌ Decoding failed for URL: \(urlString)")
-            print("✅ JSON Response:\n\(jsonString)")
             throw error
         }
     }
