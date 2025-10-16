@@ -141,20 +141,16 @@ struct SquareView: View {
 struct TwoLinesGridView: View {
     var content: ViewableContent
     
-    
     var body: some View {
         HStack(spacing: 8) {
             ImageLoaderView(url: content.imageUrl)
                 .frame(width: 100, height: 100)
             
-            
-            VStack(alignment: .leading) {
-                //                Text(content.releaseDate)
-                //                    .foregroundColor(.gray)
-                
+            VStack(alignment: .leading, spacing: 5) { 
                 Text(content.name)
                     .foregroundColor(.white)
                 
+                // Duration Capsule
                 HStack(spacing: 5) {
                     Image(systemName: "restart.circle.fill")
                         .foregroundColor(.white)
@@ -162,13 +158,14 @@ struct TwoLinesGridView: View {
                         .foregroundColor(.white)
                         .font(.caption)
                 }
-                .padding(8)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
                 .background(.gray.opacity(0.2))
                 .cornerRadius(20)
-                .frame(alignment: .leading)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
