@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SectionDetailView: View {
     var section: SectionEntity
+    @State private var shouldShowDetails = false
     
     var body: some View {
         switch section.displayStyle {
@@ -17,6 +18,13 @@ struct SectionDetailView: View {
                 HStack(spacing: 8) {
                     ForEach(section.viewableContent) { content in
                         SquareView(content: content)
+                            .onTapGesture {
+                                shouldShowDetails = true
+                            }
+                            .sheet(isPresented: $shouldShowDetails) {
+                                MoreDetailsViewRepresentable(content: content)
+                                    .presentationDetents([.fraction(0.80)])
+                            }
                     }
                 }
             }
@@ -28,11 +36,17 @@ struct SectionDetailView: View {
             ]
             
             ScrollView(.horizontal, showsIndicators: false) {
-                
                 LazyHGrid(rows: twoRowLayout, spacing: 16) {
                     ForEach(section.viewableContent) { content in
                         TwoLinesGridView(content: content)
                             .frame(width: 300)
+                            .onTapGesture {
+                                shouldShowDetails = true
+                            }
+                            .sheet(isPresented: $shouldShowDetails) {
+                                MoreDetailsViewRepresentable(content: content)
+                                    .presentationDetents([.fraction(0.80)])
+                            }
                     }
                 }
                 .padding(.horizontal)
@@ -44,6 +58,13 @@ struct SectionDetailView: View {
                 HStack(spacing: 8) {
                     ForEach(section.viewableContent) { content in
                         BigSquareView(content: content)
+                            .onTapGesture {
+                                shouldShowDetails = true
+                            }
+                            .sheet(isPresented: $shouldShowDetails) {
+                                MoreDetailsViewRepresentable(content: content)
+                                    .presentationDetents([.fraction(0.80)])
+                            }
                     }
                 }
             }
@@ -105,8 +126,8 @@ struct SquareView: View {
                 .background(.gray.opacity(0.2))
                 .cornerRadius(20)
                 
-//                Text(content.releaseDate)
-//                    .foregroundColor(.white)
+                //                Text(content.releaseDate)
+                //                    .foregroundColor(.white)
                 
                 Spacer()
             }
@@ -128,8 +149,8 @@ struct TwoLinesGridView: View {
             
             
             VStack(alignment: .leading) {
-//                Text(content.releaseDate)
-//                    .foregroundColor(.gray)
+                //                Text(content.releaseDate)
+                //                    .foregroundColor(.gray)
                 
                 Text(content.name)
                     .foregroundColor(.white)
@@ -159,7 +180,7 @@ struct QueueView: View {
             ZStack(alignment: .bottomTrailing) {
                 
                 VStack(alignment: .leading, spacing: 10) {
-         
+                    
                     VStack(alignment: .leading, spacing: 2) {
                         Text(section.viewableContent.first?.name ?? "")
                             .font(.title3)
@@ -167,21 +188,21 @@ struct QueueView: View {
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .lineLimit(3)
-
+                        
                         Text(section.viewableContent.first?.duration ?? "")
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                                        
+                    
                     Image(systemName: "play.circle.fill")
                         .font(.system(size: 35))
                         .foregroundColor(.white)
                         .padding(.trailing, 0)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    
+                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             

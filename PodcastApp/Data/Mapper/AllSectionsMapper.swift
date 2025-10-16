@@ -30,30 +30,33 @@ extension ViewableContent {
         case .podcast(let podcast):
             self.imageUrl = podcast.avatarURL
             self.name = podcast.name
-            duration = formatDuration(seconds: podcast.duration)
-            releaseDate = ""
-            episodeCount = podcast.episodeCount.description
+            self.description = podcast.description
+            self.duration = formatDuration(seconds: podcast.duration)
+            self.releaseDate = ""
+            self.episodeCount = podcast.episodeCount.description
             
         case .episode(let episode):
-            imageUrl = episode.avatarURL
-            name = episode.name
-            duration = formatDuration(seconds: episode.duration)
-            releaseDate = episode.releaseDate
-            episodeCount = ""
+            self.imageUrl = episode.avatarURL
+            self.name = episode.name
+            self.description = episode.description
+            self.duration = formatDuration(seconds: episode.duration)
+            self.releaseDate = episode.releaseDate
+            self.episodeCount = ""
             
         case .audiobook(let audiobook):
-            imageUrl = audiobook.avatarURL
-            name = audiobook.name
-            duration = formatDuration(seconds: audiobook.duration)
-            releaseDate = audiobook.releaseDate
-            episodeCount = ""
-            
+            self.imageUrl = audiobook.avatarURL
+            self.name = audiobook.name
+            self.description = audiobook.description
+            self.duration = formatDuration(seconds: audiobook.duration)
+            self.releaseDate = audiobook.releaseDate
+            self.episodeCount = ""
         case .article(let article):
-            imageUrl = article.avatarURL
-            name = article.name
-            duration = formatDuration(seconds: article.duration)
-            releaseDate = article.releaseDate
-            episodeCount = ""
+            self.imageUrl = article.avatarURL
+            self.name = article.name
+            self.description = article.description
+            self.duration = formatDuration(seconds: article.duration)
+            self.releaseDate = article.releaseDate
+            self.episodeCount = ""
         }
     }
     
