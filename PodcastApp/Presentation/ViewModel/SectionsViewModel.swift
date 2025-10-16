@@ -14,7 +14,7 @@ class SectionsViewModel: ObservableObject {
     @Published var homeLoadingType: LoadingType = .none
     @Published var searchLoadingType: LoadingType = .none
     @Published private var searchTask: Task<Void, Never>? = nil
-    private let debounceTime: UInt64 = 900_000_000
+    private let debounceTime: UInt64 = 200_000_000
     
     func getHomeSections() async {
         homeLoadingType = .loading
@@ -85,18 +85,35 @@ class SectionsViewModel: ObservableObject {
         decoder.dateDecodingStrategy = .iso8601
         let sectoins = try! decoder.decode(AllSectionsDTO.self, from: data)
         let entity = AllSectionsEntity(dto: sectoins)
+        
+        if homeSections?.sections.count == 0 {
+            homeLoadingType = .empty
+        } else {
+            homeLoadingType = .done
+        }
+        
         return entity
     }
     
-    func stubSearchSections(query: String) -> AllSectionsEntity {
-        guard let path = Bundle.main.path(forResource: "GetSections", ofType: "json") else {
-            fatalError("GetSections.json not found in bundle.")
+    func stubSearchSections(query: String) -> SearchEntity {
+        guard let path = Bundle.main.path(forResource: "GetSearch", ofType: "json") else {
+            fatalError("GetSearch.json not found in bundle.")
         }
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let sectoins = try! decoder.decode(AllSectionsDTO.self, from: data)
-        let entity = AllSectionsEntity(dto: sectoins)
+        let sectoins = try! decoder.decode(SearchDTO.self, from: data)
+        let searchResult = SearchEntity(dto: sectoins).sections?.filter {
+            $0.name?.lowercased().contains(query.lowercased()) ?? false
+        }
+        let entity = SearchEntity(sections: searchResult)
+        
+        if search?.sections?.count ?? 0 == 0 {
+            searchLoadingType = .empty
+        } else {
+            searchLoadingType = .done
+        }
+        
         return entity
     }
 }
