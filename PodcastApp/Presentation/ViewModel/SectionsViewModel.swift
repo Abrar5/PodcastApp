@@ -13,6 +13,8 @@ class SectionsViewModel: ObservableObject {
     @Published var search: SearchEntity?
     @Published var homeLoadingType: LoadingType = .none
     @Published var searchLoadingType: LoadingType = .none
+    @Published private var searchTask: Task<Void, Never>? = nil
+    private let debounceTime: UInt64 = 900_000_000
     
     func getHomeSections() async {
         homeLoadingType = .loading
@@ -53,6 +55,27 @@ class SectionsViewModel: ObservableObject {
     func stubHomeSections() -> AllSectionsEntity {
         guard let path = Bundle.main.path(forResource: "GetSections", ofType: "json") else {
             fatalError("GetSections.json not found in bundle.")
+    func search(query: String) {
+        
+        searchTask?.cancel()
+        
+        guard !query.isEmpty else {
+            return
+        }
+
+        searchTask = Task {
+            do {
+                try await Task.sleep(nanoseconds: debounceTime)
+                
+                try Task.checkCancellation()
+                
+                await getSearch(query: query)
+                
+            } catch is CancellationError {
+                print("Search cancelled user is currently typing")
+            } catch {
+                print("Search failed: \(error.localizedDescription)")
+            }
         }
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         let decoder = JSONDecoder()

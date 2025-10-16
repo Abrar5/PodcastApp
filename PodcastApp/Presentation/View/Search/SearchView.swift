@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+
 struct SearchView: View {
     @StateObject private var viewModel = SectionsViewModel()
     @State var searchText: String = ""
+
     
     var body: some View {
         VStack {
@@ -29,11 +31,7 @@ struct SearchView: View {
         }
         .searchable(text: $searchText, prompt: "Search...")
         .onChange(of: searchText) {
-            if !searchText.isEmpty {
-                Task {
-                    await viewModel.getSearch(query: searchText)
-                }
-            }
+            viewModel.search(query:searchText)
         }
     }
     
