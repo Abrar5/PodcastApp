@@ -52,9 +52,6 @@ class SectionsViewModel: ObservableObject {
         }
     }
     
-    func stubHomeSections() -> AllSectionsEntity {
-        guard let path = Bundle.main.path(forResource: "GetSections", ofType: "json") else {
-            fatalError("GetSections.json not found in bundle.")
     func search(query: String) {
         
         searchTask?.cancel()
@@ -77,6 +74,12 @@ class SectionsViewModel: ObservableObject {
                 print("Search failed: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func stubHomeSections() -> AllSectionsEntity {
+        guard let path = Bundle.main.path(forResource: "GetSections", ofType: "json") else {
+            fatalError("GetSections.json not found in bundle.")
+        }
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -93,10 +96,7 @@ class SectionsViewModel: ObservableObject {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         let sectoins = try! decoder.decode(AllSectionsDTO.self, from: data)
-        let searchResult = AllSectionsEntity(dto: sectoins).sections.filter {
-            $0.name.lowercased().contains(query.lowercased())
-        }
-        let entity = AllSectionsEntity(sections: searchResult)
+        let entity = AllSectionsEntity(dto: sectoins)
         return entity
     }
 }
