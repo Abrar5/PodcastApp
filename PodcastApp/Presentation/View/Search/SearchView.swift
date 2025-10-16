@@ -7,10 +7,22 @@
 
 import SwiftUI
 struct SearchView: View {
+    @StateObject private var viewModel = SectionsViewModel()
+    @State var searchText: String = ""
+    
     var body: some View {
-        VStack{
-            Text("SearchView")
+        VStack {
+            if let sections = viewModel.homeSections?.sections.sorted(by: { $0.order < $1.order }), !searchText.isEmpty {
+                ForEach(sections) { item in
+                    Text(item.name)
+                }
+            }
         }
-        .background(.black)
+        .searchable(text: $searchText, prompt: "Search...")
+        .onChange(of: searchText) {
+            Task {
+                await viewModel.getSearch(query: searchText)
+            }
+        }
     }
 }

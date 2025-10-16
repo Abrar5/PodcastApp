@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var viewModel = SectionsViewModel()
     @State var selectedType: ContentType = ContentType.allCases.first ?? .podcast
     
     var body: some View {

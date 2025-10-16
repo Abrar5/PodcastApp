@@ -13,18 +13,20 @@ struct MainTabView: View {
             NavigationView {
                 HomeView()
             }
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("house")
-                }
+            .tabItem {
+                Image(systemName: "house.fill")
+                Text("house")
+            }
+            
             NavigationView {
                 SearchView()
             }
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }
+            .tabItem {
+                Image(systemName: "magnifyingglass")
+                Text("Search")
+            }
         }
+        .preferredColorScheme(.dark)
         .background(.black)
         .accentColor(.white)
     }
