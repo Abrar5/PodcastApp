@@ -126,9 +126,6 @@ struct SquareView: View {
                 .background(.gray.opacity(0.2))
                 .cornerRadius(20)
                 
-                //                Text(content.releaseDate)
-                //                    .foregroundColor(.white)
-                
                 Spacer()
             }
             .frame(alignment: .leading)
@@ -146,7 +143,7 @@ struct TwoLinesGridView: View {
             ImageLoaderView(url: content.imageUrl)
                 .frame(width: 100, height: 100)
             
-            VStack(alignment: .leading, spacing: 5) { 
+            VStack(alignment: .leading, spacing: 5) {
                 Text(content.name)
                     .foregroundColor(.white)
                 

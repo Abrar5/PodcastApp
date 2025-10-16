@@ -22,7 +22,7 @@ class MoreDetailsViewController: UIViewController {
     
     private func viewStyle() {
         self.overrideUserInterfaceStyle = .dark
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .clear
     }
     
     private func configureTextView() {
@@ -30,7 +30,8 @@ class MoreDetailsViewController: UIViewController {
         descriptionTextView?.isSelectable = true
         descriptionTextView?.dataDetectorTypes = .link // Makes links clickable
         descriptionTextView?.isScrollEnabled = true // If content is long
-        descriptionTextView?.backgroundColor = .systemBackground
+        descriptionTextView?.backgroundColor = .clear
+        descriptionTextView?.textColor = .white
     }
     
     private func getReadableDescription() {
@@ -46,7 +47,9 @@ class MoreDetailsViewController: UIViewController {
                 descriptionTextView?.attributedText = attributedText
 
                 descriptionTextView?.textStorage.addAttributes(
-                    [.font: desiredDefaultFont],
+                    [.font: desiredDefaultFont,
+                     .foregroundColor: UIColor.white
+                    ],
                     range: NSRange(location: 0, length: attributedText.length)
                 )
                 
