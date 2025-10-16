@@ -10,29 +10,38 @@ import Foundation
 @MainActor
 class SectionsViewModel: ObservableObject {
     @Published var homeSections: AllSectionsEntity?
-    @Published var search: AllSectionsEntity?
+    @Published var search: SearchEntity?
+    @Published var isLoadingHome: Bool = false
+    @Published var searchLoadingType: LoadingType = .none
     
     func getHomeSections() async {
+        isLoadingHome = true
         do {
             let homeSections = try await FetchHomeSectoinsUseCase().execute()
             print("-- \(homeSections)")
-            
             self.homeSections = homeSections
+            isLoadingHome = false
         } catch {
             homeSections = stubHomeSections()
             print(error.localizedDescription)
         }
-
     }
     
     func getSearch(query: String) async {
+        searchLoadingType = .loading
         do {
             let search = try await SearchUseCase(query: query).execute()
             print("-- \(search)")
             self.search = search
+            if search.sections?.count ?? 0 == 0 {
+                searchLoadingType = .empty
+            } else {
+                searchLoadingType = .done
+            }
         } catch {
             search = stubSearchSections(query: query)
             print(error.localizedDescription)
+            searchLoadingType = .error
         }
     }
     

@@ -18,10 +18,10 @@ final class PodacstRepositoryImplementation: PodcastRepository {
         return sections
     }
     
-    func search(query: String) async throws -> AllSectionsEntity {
+    func search(query: String) async throws -> SearchEntity {
         let target = PodcastTarget.search(query: query)
-        let result = try await api.request(target, responseType: AllSectionsDTO.self)
-        let sections = AllSectionsEntity(dto: result)
+        let result = try await api.request(target, responseType: SearchDTO.self)
+        let sections = SearchEntity(dto: result)
         return sections
     }
 }
