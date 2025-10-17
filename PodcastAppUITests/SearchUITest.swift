@@ -1,13 +1,13 @@
 //
-//  AppTabNavigationUITests.swift
-//  PodcastAppUITests
+//  SearchUITest.swift
+//  PodcastApp
 //
-//  Created by Abrar on 14/10/2025.
+//  Created by Abrar on 17/10/2025.
 //
 
 import XCTest
 
-final class AppTabNavigationUITests: XCTestCase {
+final class SearchUITest: XCTestCase {
 
     var app: XCUIApplication!
 
@@ -21,20 +21,8 @@ final class AppTabNavigationUITests: XCTestCase {
     override func tearDownWithError() throws {
         app = nil
     }
-
-    func testNavigateToHomeAndVerifyExistence() throws {
-        let tabBar = app.tabBars.firstMatch
-        XCTAssertTrue(tabBar.exists, "Tab Bar should be present on launch.")
-
-        let homeTabButton = tabBar.buttons.element(boundBy: 0)
-
-        let exists = homeTabButton.waitForExistence(timeout: 5)
-        XCTAssertTrue(exists, "The Home Tab button (Index 0) did not appear in time.")
-
-        homeTabButton.tap()
-    }
     
-    func testNavigateToSearchAndVerifyExistence() throws {
+    func testSearch() throws {
         let tabBar = app.tabBars.firstMatch
         XCTAssertTrue(tabBar.exists, "Tab Bar should be present on launch.")
 
@@ -42,5 +30,10 @@ final class AppTabNavigationUITests: XCTestCase {
 
         let exists = searchTabButton.waitForExistence(timeout: 5)
         XCTAssertTrue(exists, "The Search Tab button (Index 1) did not appear in time.")
+
+        searchTabButton.tap()
+
+        let searchField = app.searchFields["Search..."]
+        XCTAssertTrue(searchField.waitForExistence(timeout: 2), "Failed to navigate to SearchView or find its search field.")
     }
 }
