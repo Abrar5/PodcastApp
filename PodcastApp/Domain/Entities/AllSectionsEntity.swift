@@ -25,6 +25,7 @@ struct ViewableContent: Identifiable {
     var id = UUID()
     var imageUrl: String = ""
     var name: String = ""
+    var description: String = ""
     var duration: String = ""
     var releaseDate: String = ""
     var episodeCount: String = ""

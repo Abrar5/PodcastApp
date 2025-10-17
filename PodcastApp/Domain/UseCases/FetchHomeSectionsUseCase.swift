@@ -1,5 +1,5 @@
 //
-//  FetchHomeSectoinsUseCase.swift
+//  FetchHomeSectionsUseCase.swift
 //  PodcastApp
 //
 //  Created by Abrar on 15/10/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FetchHomeSectoinsUseCase {
+class FetchHomeSectionsUseCase {
     private let repository = PodacstRepositoryImplementation()
     
     func execute() async throws -> AllSectionsEntity {

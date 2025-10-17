@@ -13,11 +13,11 @@ struct AllSectionsDTO: Codable {
 
 struct SectionDTO: Codable, Identifiable {
     let id = UUID()
-    let name: String
-    let type: String
-    let contentType: String
-    let order: Int
-    let content: [ContentDTO]
+    let name: String?
+    let type: String?
+    let contentType: String?
+    let order: Int?
+    let content: [ContentDTO]?
 
     enum CodingKeys: String, CodingKey {
         case name, type, order, content
@@ -33,10 +33,10 @@ enum ContentDTO: Codable, Identifiable {
     
     var id: String {
         switch self {
-        case .podcast(let p): return p.podcastID
-        case .episode(let e): return e.episodeID
-        case .audiobook(let a): return a.audiobookID
-        case .article(let a): return a.articleID
+        case .podcast(let p): return p.podcastID ?? "0"
+        case .episode(let e): return e.episodeID ?? "0"
+        case .audiobook(let a): return a.audiobookID ?? "0"
+        case .article(let a): return a.articleID ?? "0"
         }
     }
     
@@ -69,12 +69,12 @@ enum ContentDTO: Codable, Identifiable {
 
 // MARK: - Podcast
 struct PodcastDTO: Codable {
-    let podcastID, name, description: String
-    let avatarURL: String
-    let episodeCount, duration: Int
+    let podcastID, name, description: String?
+    let avatarURL: String?
+    let episodeCount, duration: Int?
     let language: String?
-    let priority, popularityScore: Int
-    let score: Double
+    let priority, popularityScore: Int?
+    let score: Double?
 
     enum CodingKeys: String, CodingKey {
         case podcastID = "podcast_id"
@@ -87,21 +87,21 @@ struct PodcastDTO: Codable {
 
 // MARK: - Episode
 struct EpisodeDTO: Codable {
-    let podcastPopularityScore, podcastPriority: Int
-    let episodeID, name: String
+    let podcastPopularityScore, podcastPriority: Int?
+    let episodeID, name: String?
     let seasonNumber: Int?
-    let episodeType, podcastName, authorName, description: String
+    let episodeType, podcastName, authorName, description: String?
     let number: Int?
-    let duration: Int
-    let avatarURL, separatedAudioURL, audioURL: String
-    let releaseDate, podcastID: String
-    let chapters: [String]
-    let paidIsEarlyAccess, paidIsNowEarlyAccess, paidIsExclusive: Bool
+    let duration: Int?
+    let avatarURL, separatedAudioURL, audioURL: String?
+    let releaseDate, podcastID: String?
+    let chapters: [String]?
+    let paidIsEarlyAccess, paidIsNowEarlyAccess, paidIsExclusive: Bool?
     let paidTranscriptURL, freeTranscriptURL: String?
-    let paidIsExclusivePartially: Bool
-    let paidExclusiveStartTime: Int
+    let paidIsExclusivePartially: Bool?
+    let paidExclusiveStartTime: Int?
     let paidEarlyAccessDate, paidEarlyAccessAudioURL, paidExclusivityType: String?
-    let score: Double
+    let score: Double?
 
     enum CodingKeys: String, CodingKey {
         case podcastPopularityScore, podcastPriority
@@ -134,12 +134,12 @@ struct EpisodeDTO: Codable {
 
 // MARK: - Audiobook
 struct AudiobookDTO: Codable {
-    let audiobookID, name, authorName, description: String
-    let avatarURL: String
-    let duration: Int
+    let audiobookID, name, authorName, description: String?
+    let avatarURL: String?
+    let duration: Int?
     let language: String?
-    let releaseDate: String
-    let score: Double
+    let releaseDate: String?
+    let score: Double?
 
     enum CodingKeys: String, CodingKey {
         case audiobookID = "audiobook_id"
@@ -153,11 +153,11 @@ struct AudiobookDTO: Codable {
 
 // MARK: - AudioArticle
 struct AudioArticleDTO: Codable {
-    let articleID, name, authorName, description: String
-    let avatarURL: String
-    let duration: Int
-    let releaseDate: String
-    let score: Double
+    let articleID, name, authorName, description: String?
+    let avatarURL: String?
+    let duration: Int?
+    let releaseDate: String?
+    let score: Double?
 
     enum CodingKeys: String, CodingKey {
         case articleID = "article_id"

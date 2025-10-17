@@ -21,11 +21,9 @@ final class APIClient {
         config.timeoutIntervalForResource = 60
         config.waitsForConnectivity = true
         self.session = URLSession(configuration: config)
-        
     }
     
-    func request<T: Decodable>(_ target: NetworkTarget, responseType: T.Type) async throws -> T {
-        
+    func request<T: Decodable>(_ target: NetworkTarget, responseType: T.Type, shouldConvertFromSnakeCase: Bool = false) async throws -> T {
         
         let urlString = target.baseURL + target.path
         guard let url = URL(string: urlString) else {
@@ -36,7 +34,7 @@ final class APIClient {
         print("✅ URL:", request)
         request.httpMethod = target.method.rawValue
         target.headers?.forEach { request.setValue($1, forHTTPHeaderField: $0) }
-      
+        
         // Force HTTP/1.1 to avoid QUIC issues
         request.setValue("HTTP/1.1", forHTTPHeaderField: "Alt-Used")
         let (data, response) = try await session.data(for: request)
@@ -47,7 +45,7 @@ final class APIClient {
         }
         
         let jsonString = String(data: data, encoding: .utf8) ?? "nil"
-        print("✅ Raw response data:\n", jsonString)
+        print("✅ JSON Response:\n\(jsonString)")
         
         guard let httpResponse = response as? HTTPURLResponse,
               (200..<300).contains(httpResponse.statusCode) else {
@@ -55,13 +53,14 @@ final class APIClient {
         }
         
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        if shouldConvertFromSnakeCase {
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+        }
         
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
             print("❌ Decoding failed for URL: \(urlString)")
-            print("✅ JSON Response:\n\(jsonString)")
             throw error
         }
     }
@@ -70,12 +69,13 @@ final class APIClient {
         _ target: NetworkTarget,
         responseType: T.Type,
         retries: Int = 3,
-        delaySeconds: Double = 2
+        delaySeconds: Double = 2,
+        shouldConvertFromSnakeCase: Bool = false
     ) async throws -> T {
         var currentAttempt = 0
         while true {
             do {
-                return try await APIClient.shared.request(target, responseType: responseType)
+                return try await APIClient.shared.request(target, responseType: responseType, shouldConvertFromSnakeCase: shouldConvertFromSnakeCase)
             } catch let error as URLError where error.code == .networkConnectionLost {
                 currentAttempt += 1
                 guard currentAttempt < retries else { throw error }

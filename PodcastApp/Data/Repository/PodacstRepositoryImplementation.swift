@@ -13,15 +13,15 @@ final class PodacstRepositoryImplementation: PodcastRepository {
     func fetchHomeSections() async throws -> AllSectionsEntity {
         let target = PodcastTarget.homeSections
         
-        let result = try await api.fetchWithRetry(target,responseType: AllSectionsDTO.self)//request(target, responseType: HomeDTO.self)
+        let result = try await api.fetchWithRetry(target,responseType: AllSectionsDTO.self, shouldConvertFromSnakeCase: true)
         let sections = AllSectionsEntity(dto: result)
         return sections
     }
     
-    func search(query: String) async throws -> AllSectionsEntity {
+    func search(query: String) async throws -> SearchEntity {
         let target = PodcastTarget.search(query: query)
-        let result = try await api.request(target, responseType: AllSectionsDTO.self)
-        let sections = AllSectionsEntity(dto: result)
+        let result = try await api.request(target, responseType: SearchDTO.self)
+        let sections = SearchEntity(dto: result)
         return sections
     }
 }

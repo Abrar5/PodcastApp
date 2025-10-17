@@ -8,33 +8,33 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var viewModel = SectionsViewModel()
     @State var selectedType: ContentType = ContentType.allCases.first ?? .podcast
     
     var body: some View {
         VStack {
-            headerView
-            filterView
-                .padding([.top, .bottom], 16)
-            sectionsView
-            Spacer()
+            switch viewModel.homeLoadingType {
+            case .loading:
+                ProgressView()
+            case .done:
+                headerView
+                filterView
+                    .padding([.top, .bottom], 16)
+                sectionsView
+                Spacer()
+            case .empty:
+                Text("No data found")
+                    .foregroundColor(.white)
+            default:
+                EmptyView()
+            }
         }
         .padding()
         .background(.black)
         .onAppear() {
-            
-            //            for familyName in UIFont.familyNames {
-            //                print(familyName)
-            //
-            //                for fontName in UIFont.fontNames(forFamilyName: familyName) {
-            //                    print("---\(fontName)")
-            //                }
-            //            }
-            
-                                    Task {
-                                        await viewModel.getHomeSections()
-//                                        await viewModel.getSearch(query: "abc")
-                                    }
+            Task {
+                await viewModel.getHomeSections()
+            }
         }
     }
     
@@ -116,5 +116,3 @@ struct HomeView: View {
         }
     }
 }
-
-
