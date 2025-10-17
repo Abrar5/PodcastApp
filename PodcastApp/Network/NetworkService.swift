@@ -23,7 +23,7 @@ final class APIClient {
         self.session = URLSession(configuration: config)
     }
     
-    func request<T: Decodable>(_ target: NetworkTarget, responseType: T.Type, shouldConvertFromSnakeCase: Bool = false) async throws -> T {
+    func request<T: Decodable>(_ target: NetworkTarget, responseType: T.Type) async throws -> T {
         
         let urlString = target.baseURL + target.path
         guard let url = URL(string: urlString) else {
@@ -53,9 +53,6 @@ final class APIClient {
         }
         
         let decoder = JSONDecoder()
-        if shouldConvertFromSnakeCase {
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-        }
         
         do {
             return try decoder.decode(T.self, from: data)
@@ -69,13 +66,12 @@ final class APIClient {
         _ target: NetworkTarget,
         responseType: T.Type,
         retries: Int = 3,
-        delaySeconds: Double = 2,
-        shouldConvertFromSnakeCase: Bool = false
+        delaySeconds: Double = 2
     ) async throws -> T {
         var currentAttempt = 0
         while true {
             do {
-                return try await APIClient.shared.request(target, responseType: responseType, shouldConvertFromSnakeCase: shouldConvertFromSnakeCase)
+                return try await APIClient.shared.request(target, responseType: responseType)
             } catch let error as URLError where error.code == .networkConnectionLost {
                 currentAttempt += 1
                 guard currentAttempt < retries else { throw error }

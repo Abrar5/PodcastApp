@@ -27,10 +27,10 @@ enum ContentEntityType: Codable, Identifiable {
     
     var id: String {
         switch self {
-        case .podcast(let p): return p.podcastID
-        case .episode(let e): return e.episodeID
-        case .audiobook(let a): return a.audiobookID
-        case .article(let a): return a.articleID
+        case .podcast(let p): return p.podcastID ?? "00"
+        case .episode(let e): return e.episodeID ?? "00"
+        case .audiobook(let a): return a.audiobookID ?? "00"
+        case .article(let a): return a.articleID ?? "00"
         }
     }
     

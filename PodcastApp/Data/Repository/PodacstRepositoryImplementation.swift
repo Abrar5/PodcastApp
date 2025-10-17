@@ -13,7 +13,7 @@ final class PodacstRepositoryImplementation: PodcastRepository {
     func fetchHomeSections() async throws -> AllSectionsEntity {
         let target = PodcastTarget.homeSections
         
-        let result = try await api.fetchWithRetry(target,responseType: AllSectionsDTO.self, shouldConvertFromSnakeCase: true)
+        let result = try await api.fetchWithRetry(target,responseType: AllSectionsDTO.self)
         let sections = AllSectionsEntity(dto: result)
         return sections
     }

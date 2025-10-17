@@ -98,11 +98,11 @@ struct HomeView: View {
     
     private var sectionsView: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            let filteredAndSortedList = viewModel.homeSections?.sections.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order < $1.order }) ?? []
+            let filteredAndSortedList = viewModel.homeSections?.sections.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order ?? 0 < $1.order ?? 0}) ?? []
             ForEach(filteredAndSortedList) { section in
                 VStack {
                     HStack {
-                        Text(section.name)
+                        Text(section.name ?? "")
                             .foregroundColor(.white)
                             .font(AppFonts.bold(size: 20))
                         Spacer()

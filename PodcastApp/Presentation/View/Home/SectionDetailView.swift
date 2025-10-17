@@ -16,7 +16,7 @@ struct SectionDetailView: View {
         case .square:
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(section.viewableContent) { content in
+                    ForEach(section.viewableContent ?? []) { content in
                         SquareView(content: content)
                             .onTapGesture {
                                 shouldShowDetails = true
@@ -37,7 +37,7 @@ struct SectionDetailView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: twoRowLayout, spacing: 16) {
-                    ForEach(section.viewableContent) { content in
+                    ForEach(section.viewableContent ?? []) { content in
                         TwoLinesGridView(content: content)
                             .frame(width: 300)
                             .onTapGesture {
@@ -56,7 +56,7 @@ struct SectionDetailView: View {
         case .bigSquare, .big_Square:
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(section.viewableContent) { content in
+                    ForEach(section.viewableContent ?? []) { content in
                         BigSquareView(content: content)
                             .onTapGesture {
                                 shouldShowDetails = true
@@ -72,7 +72,7 @@ struct SectionDetailView: View {
         case .queue:
             QueueView(section: section)
             
-        case .none:
+        default:
             EmptyView()
         }
     }
@@ -181,13 +181,13 @@ struct QueueView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(section.viewableContent.first?.name ?? "")
+                        Text(section.viewableContent?.first?.name ?? "")
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .lineLimit(3)
                             .font(AppFonts.medium(size: 14))
                         
-                        Text(section.viewableContent.first?.duration ?? "")
+                        Text(section.viewableContent?.first?.duration ?? "")
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .font(AppFonts.extraLight(size: 12))
@@ -206,8 +206,8 @@ struct QueueView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             ZStack {
-                if section.viewableContent.count > 2 {
-                    ImageLoaderView(url: section.viewableContent[2].imageUrl)
+                if section.viewableContent?.count ?? 0 > 2 {
+                    ImageLoaderView(url: section.viewableContent?[2].imageUrl ?? "")
                         .frame(width: 80, height: 80)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .rotationEffect(.degrees(5))
@@ -215,8 +215,8 @@ struct QueueView: View {
                         .opacity(0.7)
                 }
                 
-                if section.viewableContent.count > 1 {
-                    ImageLoaderView(url: section.viewableContent[1].imageUrl)
+                if section.viewableContent?.count ?? 0 > 1 {
+                    ImageLoaderView(url: section.viewableContent?[1].imageUrl ?? "")
                         .frame(width: 80, height: 80)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .rotationEffect(.degrees(-3))
@@ -224,7 +224,7 @@ struct QueueView: View {
                         .opacity(0.9)
                 }
                 
-                ImageLoaderView(url: section.viewableContent.first?.imageUrl ?? "")
+                ImageLoaderView(url: section.viewableContent?.first?.imageUrl ?? "")
                     .frame(width: 90, height: 90)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
             }

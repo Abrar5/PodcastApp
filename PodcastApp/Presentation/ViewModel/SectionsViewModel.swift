@@ -66,7 +66,6 @@ class SectionsViewModel: ObservableObject {
                 try Task.checkCancellation()
                 
                 await getSearch(query: query)
-                
             } catch is CancellationError {
                 print("Search cancelled user is currently typing")
             } catch {
