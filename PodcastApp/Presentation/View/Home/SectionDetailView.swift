@@ -116,7 +116,7 @@ struct SquareView: View {
             
             HStack(spacing: 8) {
                 HStack(spacing: 5) {
-                    Image(systemName: "restart.circle.fill")
+                    Image(systemName: "play.circle.fill")
                         .foregroundColor(.white)
                     Text(content.duration)
                         .foregroundColor(.white)
@@ -149,7 +149,7 @@ struct TwoLinesGridView: View {
                 
                 // Duration Capsule
                 HStack(spacing: 5) {
-                    Image(systemName: "restart.circle.fill")
+                    Image(systemName: "play.circle.fill")
                         .foregroundColor(.white)
                     Text(content.duration)
                         .foregroundColor(.white)
