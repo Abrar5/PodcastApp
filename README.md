@@ -4,8 +4,10 @@
   - Tap a card to view its description and navigate to the website for the full content (if there is a link).
   - Implement search functionality with result display.
   - Start searching after a 200ms debounce delay.
+  - Handle multiple loading state (loading, empty, error, and done) to show content according to the state (progress view, empty view, error view, and content view).
   - Include unit tests for core logic.
   - Add UI tests for key interface components.
+  - Using SwiftUI mainly and UIKit for the description bottom sheet.
 
 # Requirements:
   - Xcode Version: 16.3.
@@ -29,9 +31,14 @@
 
   - Search View:
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Search.imageset/Search.png" alt="Search" width="300"/>
-
+    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Empty_Search.imageset/Empty_Search.png" alt="Empty_Search" width="300"/>
+    
+    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Search_Results.imageset/Search_Results.png" alt="Search_Results" width="300"/>
     
   - Description Bottom Sheet:
-    
-    <img src="NYTimesWidget/Assets.xcassets/Screenshots/Description_Bottom_Sheet.imageset/Description_Bottom_Sheet.png" alt="Description_Bottom_Sheet" width="300"/>
+
+    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Description_Bottom_Sheet.imageset/Description_Bottom_Sheet.png" alt="Description_Bottom_Sheet" width="300"/>
+
+    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Description_Link.imageset/Description_Link.png" alt="Description_Link" width="300"/>
+
+
