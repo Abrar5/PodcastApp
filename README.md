@@ -25,6 +25,33 @@
 # Architecture:
   - Clean Architecture and MVVM.
 
+```bash
+PodcastApp
+├── Data
+│   ├── DTO
+│   │   └── Responses
+│   ├── Mappers
+│   ├── Network
+│   └── Repository
+│
+├── Domain
+│   ├── Entities
+│   ├── Enums
+│   ├── Extension
+│   ├── Repository
+│   └── UseCases
+│
+├── Network
+│
+└── Presentation
+    ├── View
+    └── ViewModel
+
+PodcastAppTests
+PodcastAppUITests
+```
+
+
 # Screenshots:
   - Home View:
     
