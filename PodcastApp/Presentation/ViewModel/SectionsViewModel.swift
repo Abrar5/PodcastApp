@@ -19,7 +19,7 @@ class SectionsViewModel: ObservableObject {
     func getHomeSections() async {
         homeLoadingType = .loading
         do {
-            let homeSections = try await FetchHomeSectoinsUseCase().execute()
+            let homeSections = try await FetchHomeSectionsUseCase().execute()
             print("-- \(homeSections)")
             self.homeSections = homeSections
             if homeSections.sections.count == 0 {
@@ -83,8 +83,8 @@ class SectionsViewModel: ObservableObject {
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let sectoins = try! decoder.decode(AllSectionsDTO.self, from: data)
-        let entity = AllSectionsEntity(dto: sectoins)
+        let sections = try! decoder.decode(AllSectionsDTO.self, from: data)
+        let entity = AllSectionsEntity(dto: sections)
         
         if homeSections?.sections.count == 0 {
             homeLoadingType = .empty
@@ -102,8 +102,8 @@ class SectionsViewModel: ObservableObject {
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let sectoins = try! decoder.decode(SearchDTO.self, from: data)
-        let searchResult = SearchEntity(dto: sectoins).sections?.filter {
+        let sections = try! decoder.decode(SearchDTO.self, from: data)
+        let searchResult = SearchEntity(dto: sections).sections?.filter {
             $0.name?.lowercased().contains(query.lowercased()) ?? false
         }
         let entity = SearchEntity(sections: searchResult)
