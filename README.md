@@ -1,11 +1,11 @@
 # Features:  
   - Two tabs: Home and Search.
-  * <ins> Home </ins>:
+  * <ins>Home</ins>:
       - Fetch **home sections** and their details.
       - Support multiple **display modes**: square, bigSquare, twoLinesGrid, and queue.
       - Tap on a card to view its **description** (UIKit) and **navigate** to the website for the full content (if there is a link).
 
-  * <ins> Search </ins>:
+  * <ins>Search</ins>:
     - Implement **search** functionality with result display.
     - Start searching after a **200ms debounce delay**
 
