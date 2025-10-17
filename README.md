@@ -44,7 +44,7 @@ PodcastApp
 │
 ├── Network
 │
-└── Presentation
+├── Presentation
 │   ├──  View
 │   └── ViewModel
 │
@@ -60,25 +60,25 @@ PodcastAppUITests
 # Screenshots:
   - Home View:
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Home_DisplayType1.imageset/Home_DisplayType1.png" alt="Home_DisplayType1" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Home_DisplayType1.imageset/Home_DisplayType1.png" alt="Home_DisplayType1" width="300"/>
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Home_DisplayType2.imageset/Home_DisplayType2.png" alt="Home_DisplayType2" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Home_DisplayType2.imageset/Home_DisplayType2.png" alt="Home_DisplayType2" width="300"/>
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Home_DisplayType3.imageset/Home_DisplayType3.png" alt="Home_DisplayType3" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Home_DisplayType3.imageset/Home_DisplayType3.png" alt="Home_DisplayType3" width="300"/>
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Home_DisplayType4.imageset/Home_DisplayType4.png" alt="Home_DisplayType4" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Home_DisplayType4.imageset/Home_DisplayType4.png" alt="Home_DisplayType4" width="300"/>
 
 
   - Search View:
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Empty_Search.imageset/Empty_Search.png" alt="Empty_Search" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Empty_Search.imageset/Empty_Search.png" alt="Empty_Search" width="300"/>
     
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Search_Results.imageset/Search_Results.png" alt="Search_Results" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Search_Results.imageset/Search_Results.png" alt="Search_Results" width="300"/>
     
   - Description Bottom Sheet:
 
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Description_Bottom_Sheet.imageset/Description_Bottom_Sheet.png" alt="Description_Bottom_Sheet" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Description_Bottom_Sheet.imageset/Description_Bottom_Sheet.png" alt="Description_Bottom_Sheet" width="300"/>
 
-    <img src="PodcastApp/Assets.xcassets/OutputScreenshots/Description_Link.imageset/Description_Link.png" alt="Description_Link" width="300"/>
+    <img src="PodcastApp/Resources/Assets.xcassets/OutputScreenshots/Description_Link.imageset/Description_Link.png" alt="Description_Link" width="300"/>
 
 
