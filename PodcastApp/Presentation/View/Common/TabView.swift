@@ -15,16 +15,18 @@ struct MainTabView: View {
             }
             .tabItem {
                 Image(systemName: "house.fill")
-                Text("house")
+                    .accessibilityIdentifier("HomeTabImage")
             }
+            .accessibilityIdentifier("HomeTabContainer")
             
             NavigationView {
                 SearchView()
             }
             .tabItem {
                 Image(systemName: "magnifyingglass")
-                Text("Search")
+                    .accessibilityIdentifier("SearchTabImage")
             }
+            .accessibilityIdentifier("SearchTabContainer")
         }
         .preferredColorScheme(.dark)
         .background(.black)
