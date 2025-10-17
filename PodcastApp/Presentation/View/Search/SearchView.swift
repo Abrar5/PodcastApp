@@ -22,9 +22,11 @@ struct SearchView: View {
             case .empty:
                 Text("No result found")
                     .foregroundColor(.white)
+                    .font(AppFonts.semiBold(size: 16))
             case .error:
                 Text("Something went wrong")
                     .foregroundColor(.white)
+                    .font(AppFonts.semiBold(size: 16))
             default:
                 EmptyView()
             }
@@ -48,11 +50,14 @@ struct SearchView: View {
                                 Text(subItem.name ?? "")
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(AppFonts.bold(size: 16))
                                 
                                 Text(subItem.description ?? "")
                                     .lineLimit(1)
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(AppFonts.text(size: 12))
+
                                 
                                 HStack {
                                     Spacer()

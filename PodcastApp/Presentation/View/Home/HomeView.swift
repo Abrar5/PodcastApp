@@ -25,6 +25,7 @@ struct HomeView: View {
             case .empty:
                 Text("No data found")
                     .foregroundColor(.white)
+                    .font(AppFonts.semiBold(size: 16))
             default:
                 EmptyView()
             }
@@ -47,7 +48,7 @@ struct HomeView: View {
             
             Text("Good Evening, Abrar")
                 .foregroundColor(.white)
-            
+                .font(AppFonts.bold(size: 14))
             Image(systemName: "star.circle.fill")
                 .resizable()
                 .frame(width: 20, height: 20)
@@ -68,6 +69,7 @@ struct HomeView: View {
                     .background(Color.red)
                     .clipShape(Circle())
                     .offset(x: -5, y: -8)
+                    .font(AppFonts.thin(size: 8))
             }
         }
         .frame(maxWidth: .infinity)
@@ -80,6 +82,7 @@ struct HomeView: View {
                     VStack {
                         Text(type.localizedDescription)
                             .foregroundColor(.white)
+                            .font(AppFonts.semiBold(size: 16))
                     }
                     .frame(maxWidth: .infinity)
                     .padding(8)
@@ -101,7 +104,7 @@ struct HomeView: View {
                     HStack {
                         Text(section.name)
                             .foregroundColor(.white)
-                            .font(.system(size: 20))
+                            .font(AppFonts.bold(size: 20))
                         Spacer()
                         Image(systemName: "arrow.right")
                             .resizable()

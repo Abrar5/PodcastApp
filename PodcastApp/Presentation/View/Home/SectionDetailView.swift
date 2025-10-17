@@ -90,13 +90,13 @@ struct BigSquareView: View {
             VStack(alignment: .leading) {
                 Text(content.name)
                     .lineLimit(1)
-                //                    .font(.headline)
                     .foregroundColor(.white)
+                    .font(AppFonts.medium(size: 14))
                 
                 Text(content.episodeCount)
                     .lineLimit(1)
-                //                    .font(.subheadline)
                     .foregroundColor(.white)
+                    .font(AppFonts.text(size: 12))
             }
             .frame(alignment: .leading)
         }
@@ -107,12 +107,14 @@ struct SquareView: View {
     var content: ViewableContent
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 8) {
             ImageLoaderView(url: content.imageUrl)
             
             Text(content.name)
                 .lineLimit(1)
                 .foregroundColor(.white)
+                .font(AppFonts.medium(size: 14))
+                .frame(alignment: .leading)
             
             HStack(spacing: 8) {
                 HStack(spacing: 5) {
@@ -121,6 +123,7 @@ struct SquareView: View {
                     Text(content.duration)
                         .foregroundColor(.white)
                         .font(.caption)
+                        .font(AppFonts.extraLight(size: 6))
                 }
                 .padding(8)
                 .background(.gray.opacity(0.2))
@@ -130,7 +133,7 @@ struct SquareView: View {
             }
             .frame(alignment: .leading)
         }
-        .frame(width: 150, height: 200)
+        .frame(width: 150, height: 200, alignment: .leading)
     }
     
 }
@@ -146,6 +149,7 @@ struct TwoLinesGridView: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(content.name)
                     .foregroundColor(.white)
+                    .font(AppFonts.medium(size: 14))
                 
                 // Duration Capsule
                 HStack(spacing: 5) {
@@ -154,6 +158,7 @@ struct TwoLinesGridView: View {
                     Text(content.duration)
                         .foregroundColor(.white)
                         .font(.caption)
+                        .font(AppFonts.extraLight(size: 6))
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
@@ -177,21 +182,21 @@ struct QueueView: View {
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text(section.viewableContent.first?.name ?? "")
-                            .font(.title3)
-                            .fontWeight(.bold)
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .lineLimit(3)
+                            .font(AppFonts.medium(size: 14))
                         
                         Text(section.viewableContent.first?.duration ?? "")
-                            .font(.subheadline)
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(AppFonts.extraLight(size: 12))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Image(systemName: "play.circle.fill")
-                        .font(.system(size: 35))
+                        .resizable()
+                        .frame(width: 35, height: 35)
                         .foregroundColor(.white)
                         .padding(.trailing, 0)
                 }
