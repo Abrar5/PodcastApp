@@ -13,6 +13,7 @@
     - Handle multiple **loading state** (loading, empty, error, and done) to show content according to the state (progress view, empty view, error view, and content view).   
     - Use **Swift Concurrency (Async/Await)** for api calls.
     - **Image loader** component to load image.
+    - Apply app fonts.
     - Include **unit tests** for core logic.
     - Add **UI tests** for key interface components.
     - Use **SwiftUI** mainly and **UIKit** for the description bottom sheet.
@@ -44,8 +45,12 @@ PodcastApp
 ├── Network
 │
 └── Presentation
-    ├── View
-    └── ViewModel
+│   ├──  View
+│   └── ViewModel
+│
+└── Resources
+    ├── AppFonts
+    └── Assets
 
 PodcastAppTests
 PodcastAppUITests
