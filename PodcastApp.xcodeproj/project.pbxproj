@@ -34,7 +34,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				"Resources/AppFonts/IBM-Plex-Sans-Arabic/license.txt",
 			);
 			target = 2068B90F2E9EEE2E009BCCC5 /* PodcastApp */;
 		};
