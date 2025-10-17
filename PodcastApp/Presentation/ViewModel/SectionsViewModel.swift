@@ -53,7 +53,6 @@ class SectionsViewModel: ObservableObject {
     }
     
     func search(query: String) {
-        
         searchTask?.cancel()
         
         guard !query.isEmpty else {

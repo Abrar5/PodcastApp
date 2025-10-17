@@ -11,7 +11,8 @@ import XCTest
 
 final class SearchUseCaseTests: XCTestCase {
     var sut: SearchUseCase!
-    
+    var viewModel: SectionsViewModel!
+
     override func setUp() {
         super.setUp()
     }
@@ -19,6 +20,7 @@ final class SearchUseCaseTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         sut = nil
+        viewModel = nil
     }
     
     func testSearch_success() async {
@@ -31,6 +33,14 @@ final class SearchUseCaseTests: XCTestCase {
             XCTFail("No Search Result")
             XCTAssertNil(error.localizedDescription)
         }
+        expect.fulfill()
+    }
+    
+    @MainActor func testSearch() {
+        let expect = XCTestExpectation(description: "Search Use Case")
+        viewModel = SectionsViewModel()
+        let result: () = viewModel.search(query: "Intelligence")
+        XCTAssertNotNil(result)
         expect.fulfill()
     }
 }
