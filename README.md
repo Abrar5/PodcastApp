@@ -33,7 +33,7 @@ PodcastApp
 │   │   └── Responses
 │   ├── Mappers
 │   ├── Network
-│   └── Repository
+│   └── RepositoryImplementation
 │
 ├── Domain
 │   ├── Entities
