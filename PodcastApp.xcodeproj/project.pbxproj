@@ -6,17 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		207D34D82EA055C300B4CFB2 /* IBMPlexSansArabic-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34CC2EA0555000B4CFB2 /* IBMPlexSansArabic-Bold.otf */; };
-		207D34D92EA055C900B4CFB2 /* IBMPlexSansArabic-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34CD2EA0555000B4CFB2 /* IBMPlexSansArabic-ExtraLight.otf */; };
-		207D34DA2EA055CD00B4CFB2 /* IBMPlexSansArabic-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34CE2EA0555000B4CFB2 /* IBMPlexSansArabic-Light.otf */; };
-		207D34DB2EA055D100B4CFB2 /* IBMPlexSansArabic-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34CF2EA0555000B4CFB2 /* IBMPlexSansArabic-Medium.otf */; };
-		207D34DC2EA055D600B4CFB2 /* IBMPlexSansArabic-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34D02EA0555000B4CFB2 /* IBMPlexSansArabic-Regular.otf */; };
-		207D34DD2EA055DA00B4CFB2 /* IBMPlexSansArabic-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34D12EA0555000B4CFB2 /* IBMPlexSansArabic-SemiBold.otf */; };
-		207D34DE2EA055E000B4CFB2 /* IBMPlexSansArabic-Text.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34D22EA0555000B4CFB2 /* IBMPlexSansArabic-Text.otf */; };
-		207D34DF2EA055E400B4CFB2 /* IBMPlexSansArabic-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 207D34D32EA0555000B4CFB2 /* IBMPlexSansArabic-Thin.otf */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		2068B91F2E9EEE2E009BCCC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -38,15 +27,6 @@
 		2068B9102E9EEE2E009BCCC5 /* PodcastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068B91E2E9EEE2E009BCCC5 /* PodcastAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068B9282E9EEE2E009BCCC5 /* PodcastAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		207D34CC2EA0555000B4CFB2 /* IBMPlexSansArabic-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-Bold.otf"; sourceTree = "<group>"; };
-		207D34CD2EA0555000B4CFB2 /* IBMPlexSansArabic-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-ExtraLight.otf"; sourceTree = "<group>"; };
-		207D34CE2EA0555000B4CFB2 /* IBMPlexSansArabic-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-Light.otf"; sourceTree = "<group>"; };
-		207D34CF2EA0555000B4CFB2 /* IBMPlexSansArabic-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-Medium.otf"; sourceTree = "<group>"; };
-		207D34D02EA0555000B4CFB2 /* IBMPlexSansArabic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-Regular.otf"; sourceTree = "<group>"; };
-		207D34D12EA0555000B4CFB2 /* IBMPlexSansArabic-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-SemiBold.otf"; sourceTree = "<group>"; };
-		207D34D22EA0555000B4CFB2 /* IBMPlexSansArabic-Text.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-Text.otf"; sourceTree = "<group>"; };
-		207D34D32EA0555000B4CFB2 /* IBMPlexSansArabic-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansArabic-Thin.otf"; sourceTree = "<group>"; };
-		207D34D42EA0555000B4CFB2 /* license.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -54,6 +34,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				"Resources/AppFonts/IBM-Plex-Sans-Arabic/license.txt",
 			);
 			target = 2068B90F2E9EEE2E009BCCC5 /* PodcastApp */;
 		};
@@ -108,7 +89,6 @@
 		2068B9072E9EEE2E009BCCC5 = {
 			isa = PBXGroup;
 			children = (
-				207D34CB2EA0553400B4CFB2 /* AppFonts */,
 				2068B9122E9EEE2E009BCCC5 /* PodcastApp */,
 				2068B9212E9EEE2E009BCCC5 /* PodcastAppTests */,
 				2068B92B2E9EEE2E009BCCC5 /* PodcastAppUITests */,
@@ -124,30 +104,6 @@
 				2068B9282E9EEE2E009BCCC5 /* PodcastAppUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		207D34CB2EA0553400B4CFB2 /* AppFonts */ = {
-			isa = PBXGroup;
-			children = (
-				207D34D52EA0555000B4CFB2 /* IBM-Plex-Sans-Arabic */,
-			);
-			path = AppFonts;
-			sourceTree = "<group>";
-		};
-		207D34D52EA0555000B4CFB2 /* IBM-Plex-Sans-Arabic */ = {
-			isa = PBXGroup;
-			children = (
-				207D34CC2EA0555000B4CFB2 /* IBMPlexSansArabic-Bold.otf */,
-				207D34CD2EA0555000B4CFB2 /* IBMPlexSansArabic-ExtraLight.otf */,
-				207D34CE2EA0555000B4CFB2 /* IBMPlexSansArabic-Light.otf */,
-				207D34CF2EA0555000B4CFB2 /* IBMPlexSansArabic-Medium.otf */,
-				207D34D02EA0555000B4CFB2 /* IBMPlexSansArabic-Regular.otf */,
-				207D34D12EA0555000B4CFB2 /* IBMPlexSansArabic-SemiBold.otf */,
-				207D34D22EA0555000B4CFB2 /* IBMPlexSansArabic-Text.otf */,
-				207D34D32EA0555000B4CFB2 /* IBMPlexSansArabic-Thin.otf */,
-				207D34D42EA0555000B4CFB2 /* license.txt */,
-			);
-			path = "IBM-Plex-Sans-Arabic";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,14 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				207D34DB2EA055D100B4CFB2 /* IBMPlexSansArabic-Medium.otf in Resources */,
-				207D34DF2EA055E400B4CFB2 /* IBMPlexSansArabic-Thin.otf in Resources */,
-				207D34DE2EA055E000B4CFB2 /* IBMPlexSansArabic-Text.otf in Resources */,
-				207D34DC2EA055D600B4CFB2 /* IBMPlexSansArabic-Regular.otf in Resources */,
-				207D34D82EA055C300B4CFB2 /* IBMPlexSansArabic-Bold.otf in Resources */,
-				207D34D92EA055C900B4CFB2 /* IBMPlexSansArabic-ExtraLight.otf in Resources */,
-				207D34DA2EA055CD00B4CFB2 /* IBMPlexSansArabic-Light.otf in Resources */,
-				207D34DD2EA055DA00B4CFB2 /* IBMPlexSansArabic-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
