@@ -1,13 +1,14 @@
 # Features:  
-  - Fetch home sections and their details.
-  - Support multiple display modes: square, bigSquare, twoLinesGrid, and queue.
-  - Tap a card to view its description and navigate to the website for the full content (if there is a link).
-  - Implement search functionality with result display.
-  - Start searching after a 200ms debounce delay.
-  - Handle multiple loading state (loading, empty, error, and done) to show content according to the state (progress view, empty view, error view, and content view).
-  - Include unit tests for core logic.
-  - Add UI tests for key interface components.
-  - Using SwiftUI mainly and UIKit for the description bottom sheet.
+  - Fetch **home sections** and their details.
+  - Support multiple **display modes**: square, bigSquare, twoLinesGrid, and queue.
+  - Tap on a card to view its **description** (UIKit) and **navigate** to the website for the full content (if there is a link).
+  - Implement **search** functionality with result display.
+  - Start searching after a **200ms debounce delay**
+  - Handle multiple **loading state** (loading, empty, error, and done) to show content according to the state (progress view, empty view, error view, and content view).
+  - Use **Swift Concurrency (Async/Await)** for api calls.
+  - Include **unit tests** for core logic.
+  - Add **UI tests** for key interface components.
+  - Use **SwiftUI** mainly and **UIKit** for the description bottom sheet.
 
 # Requirements:
   - Xcode Version: 16.3.
