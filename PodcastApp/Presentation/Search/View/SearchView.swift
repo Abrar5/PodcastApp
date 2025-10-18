@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct SearchView: View {
-    @StateObject private var viewModel = SectionsViewModel()
+    @StateObject private var viewModel = SearchViewModel()
     @State var searchText: String = ""
-    
     
     var body: some View {
         VStack {

@@ -11,7 +11,7 @@ import XCTest
 
 final class SearchUseCaseTests: XCTestCase {
     var sut: SearchUseCase!
-    var viewModel: SectionsViewModel!
+    var viewModel: SearchViewModel!
 
     override func setUp() {
         super.setUp()
@@ -38,7 +38,7 @@ final class SearchUseCaseTests: XCTestCase {
     
     @MainActor func testSearch() {
         let expect = XCTestExpectation(description: "Search Use Case")
-        viewModel = SectionsViewModel()
+        viewModel = SearchViewModel()
         let result: () = viewModel.search(query: "Intelligence")
         XCTAssertNotNil(result)
         expect.fulfill()
