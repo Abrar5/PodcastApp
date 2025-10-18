@@ -9,12 +9,22 @@ import Foundation
 
 @MainActor
 class SectionsViewModel: ObservableObject {
-    @Published var homeSections: AllSectionsEntity?
+    @Published var homeSections: AllSectionsEntity? {
+        didSet {
+            filteredSections = homeSections?.sections?.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order ?? 0 < $1.order ?? 0}) ?? []
+        }
+    }
     @Published var search: SearchEntity?
     @Published var homeLoadingType: LoadingType = .none
     @Published var searchLoadingType: LoadingType = .none
     @Published private var searchTask: Task<Void, Never>? = nil
     private let debounceTime: UInt64 = 200_000_000
+    var selectedType: ContentType = .podcast {
+        didSet {
+            filteredSections = homeSections?.sections?.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order ?? 0 < $1.order ?? 0}) ?? []
+        }
+    }
+    @Published var filteredSections: [SectionEntity] = []
     
     func getHomeSections() async {
         homeLoadingType = .loading
@@ -22,7 +32,7 @@ class SectionsViewModel: ObservableObject {
             let homeSections = try await FetchHomeSectionsUseCase().execute()
             print("-- \(homeSections)")
             self.homeSections = homeSections
-            if homeSections.sections.count == 0 {
+            if homeSections.sections?.count == 0 {
                 homeLoadingType = .empty
             } else {
                 homeLoadingType = .done
@@ -84,7 +94,7 @@ class SectionsViewModel: ObservableObject {
         let sections = try! decoder.decode(AllSectionsDTO.self, from: data)
         let entity = AllSectionsEntity(dto: sections)
         
-        if homeSections?.sections.count == 0 {
+        if homeSections?.sections?.count == 0 {
             homeLoadingType = .empty
         } else {
             homeLoadingType = .done

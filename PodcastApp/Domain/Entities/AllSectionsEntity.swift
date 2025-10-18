@@ -8,23 +8,63 @@
 import Foundation
 
 struct AllSectionsEntity {
-    var sections: [SectionEntity]
-    var pagination: PaginationEntity?
+    let sections: [SectionEntity]?
+    let pagination: PaginationEntity?
 }
 
+// MARK: - Pagination
 struct PaginationEntity {
     let nextPage: String?
     let totalPages: Int?
 }
 
+// MARK: - Section
 struct SectionEntity: Identifiable {
     var id = UUID()
-    var name: String?
-    var displayStyle: ContentDisplayType?
-    var contentType: String?
-    var order: Int?
-    var content: [ContentEntityType]?
-    var viewableContent: [ViewableContent]?
+    var name, type, contentType: String?
+    let order: Int?
+    let content: [ContentEntity]?
+    
+    let displayStyle: ContentDisplayType?
+    var viewableContent: [ViewableContent] = []
+}
+
+// MARK: - Content
+struct ContentEntity {
+    let podcastID: String?
+    let name, description: String?
+    let avatarURL: String?
+    let episodeCount: Int?
+    let duration: Int?
+    let language: LanguageEntity?
+    let priority, popularityScore: Int?
+    let score: Double?
+    let podcastPopularityScore, podcastPriority: Int?
+    let episodeID: String?
+    let seasonNumber: Int?
+    let episodeType: EpisodeTypeEntity?
+    let podcastName: String?
+    let authorName: String?
+    let number: Int?
+    let separatedAudioURL, audioURL: String?
+    let releaseDate: String?
+    let chapters: [Int]?
+    let paidIsEarlyAccess, paidIsNowEarlyAccess, paidIsExclusive: Bool?
+    let paidTranscriptURL, freeTranscriptURL: String?
+    let paidIsExclusivePartially: Bool?
+    let paidExclusiveStartTime: Int?
+    let paidEarlyAccessDate, paidEarlyAccessAudioURL, paidExclusivityType: String?
+    let audiobookID: String?
+    let articleID: String?
+}
+
+enum EpisodeTypeEntity: String, Codable {
+    case full = "full"
+    case trailer = "trailer"
+}
+
+enum LanguageEntity: String, Codable {
+    case en = "en"
 }
 
 struct ViewableContent: Identifiable {
@@ -35,52 +75,4 @@ struct ViewableContent: Identifiable {
     var duration: String = ""
     var releaseDate: String = ""
     var episodeCount: String = ""
-}
-
-// MARK: - Podcast
-struct PodcastEntity: Codable {
-    let podcastID, name, description: String?
-    let avatarURL: String?
-    let episodeCount, duration: Int?
-    let language: String?
-    let priority, popularityScore: Int?
-    let score: Double?
-}
-
-// MARK: - Episode
-struct EpisodeEntity: Codable {
-    let podcastPopularityScore, podcastPriority: Int?
-    let episodeID, name: String?
-    let seasonNumber: Int?
-    let episodeType, podcastName, authorName, description: String?
-    let number: Int?
-    let duration: Int?
-    let avatarURL, separatedAudioURL, audioURL: String?
-    let releaseDate, podcastID: String?
-    let chapters: [String]?
-    let paidIsEarlyAccess, paidIsNowEarlyAccess, paidIsExclusive: Bool?
-    let paidTranscriptURL, freeTranscriptURL: String?
-    let paidIsExclusivePartially: Bool?
-    let paidExclusiveStartTime: Int?
-    let paidEarlyAccessDate, paidEarlyAccessAudioURL, paidExclusivityType: String?
-    let score: Double?
-}
-
-// MARK: - Audiobook
-struct AudiobookEntity: Codable {
-    let audiobookID, name, authorName, description: String?
-    let avatarURL: String?
-    let duration: Int?
-    let language: String?
-    let releaseDate: String?
-    let score: Double?
-}
-
-// MARK: - AudioArticle
-struct AudioArticleEntity: Codable {
-    let articleID, name, authorName, description: String?
-    let avatarURL: String?
-    let duration: Int?
-    let releaseDate: String?
-    let score: Double?
 }
