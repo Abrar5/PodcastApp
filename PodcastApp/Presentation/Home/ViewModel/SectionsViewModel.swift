@@ -38,7 +38,7 @@ class SectionsViewModel: ObservableObject {
     }
     
     private func updateFilterSections() -> [SectionEntity]  {
-        return  homeSections?.sections?.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order ?? 0 < $1.order ?? 0}) ?? []
+        return homeSections?.sections?.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order ?? 0 < $1.order ?? 0}) ?? []
         
     }
     
@@ -59,13 +59,7 @@ class SectionsViewModel: ObservableObject {
         decoder.dateDecodingStrategy = .iso8601
         let sections = try! decoder.decode(AllSectionsDTO.self, from: data)
         let entity = AllSectionsEntity(dto: sections)
-        
-        if homeSections?.sections?.count == 0 {
-            homeLoadingType = .empty
-        } else {
-            homeLoadingType = .done
-        }
-        
+        homeLoadingType = updateSectionsLoadingState(entity.sections ?? [])
         return entity
     }
 }
