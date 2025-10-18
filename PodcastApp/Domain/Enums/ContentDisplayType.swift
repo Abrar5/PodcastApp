@@ -15,19 +15,14 @@ enum ContentDisplayType: String {
     
     init(from decoder: Decoder) throws {
         let rawValue = try decoder.singleValueContainer().decode(String.self)
-        switch rawValue {
-//        case "big_square", "big square":
-//            self = .bigSquare
-        default:
-            if let value = ContentDisplayType(rawValue: rawValue) {
-                self = value
-            } else {
-                self = .none
-                throw DecodingError.dataCorruptedError(
-                    in: try decoder.singleValueContainer(),
-                    debugDescription: "Invalid Content Display Type: \(rawValue)"
-                )
-            }
+        if let value = ContentDisplayType(rawValue: rawValue) {
+            self = value
+        } else {
+            self = .none
+            throw DecodingError.dataCorruptedError(
+                in: try decoder.singleValueContainer(),
+                debugDescription: "Invalid Content Display Type: \(rawValue)"
+            )
         }
     }
 }
