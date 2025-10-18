@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = SectionsViewModel()
-    @State var selectedType: ContentType = ContentType.allCases.first ?? .podcast
     
     var body: some View {
         VStack {
@@ -86,10 +85,10 @@ struct HomeView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(8)
-                    .background(selectedType == type ? Color.red : Color.gray.opacity(0.2))
+                    .background(viewModel.selectedType == type ? Color.red : Color.gray.opacity(0.2))
                     .cornerRadius(20)
                     .onTapGesture {
-                        selectedType = type
+                        viewModel.selectedType = type
                     }
                 }
             }
@@ -98,11 +97,10 @@ struct HomeView: View {
     
     private var sectionsView: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            let filteredAndSortedList = viewModel.homeSections?.sections.filter { $0.contentType == selectedType.rawValue }.sorted(by: { $0.order ?? 0 < $1.order ?? 0}) ?? []
-            ForEach(filteredAndSortedList) { section in
+            ForEach($viewModel.filteredSections, id: \.id) { section in
                 VStack {
                     HStack {
-                        Text(section.name ?? "")
+                        Text(section.name.wrappedValue ?? "")
                             .foregroundColor(.white)
                             .font(AppFonts.bold(size: 20))
                         Spacer()

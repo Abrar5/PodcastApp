@@ -20,7 +20,7 @@ final class DTOtoEntityMappingTests: XCTestCase {
         let entity = AllSectionsEntity(dto: dto)
         XCTAssertNotNil(entity)
 
-        XCTAssertEqual(dto.sections.count, entity.sections.count)
+        XCTAssertEqual(dto.sections?.count, entity.sections?.count)
         expect.fulfill()
     }
     
