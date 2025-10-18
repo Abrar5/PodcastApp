@@ -13,6 +13,7 @@ class SearchViewModel: ObservableObject {
     @Published var search: SearchEntity?
     @Published private var searchTask: Task<Void, Never>? = nil
   
+    private var shouldGetSearchResults: Bool = false
     private let debounceTime: UInt64 = 200_000_000
         
     func getSearch(query: String) async {
@@ -25,7 +26,7 @@ class SearchViewModel: ObservableObject {
         } catch {
             search = stubSearchSections(query: query)
             print(error.localizedDescription)
-            searchLoadingType = .error
+            searchLoadingType = updateErrorIndicatorLoadingState(shouldGetSearchResults: shouldGetSearchResults)
         }
     }
     
@@ -39,11 +40,11 @@ class SearchViewModel: ObservableObject {
         searchTask = Task {
             do {
                 try await Task.sleep(nanoseconds: debounceTime)
-                
                 try Task.checkCancellation()
-                
+                shouldGetSearchResults = true
                 await getSearch(query: query)
             } catch is CancellationError {
+                shouldGetSearchResults = false
                 print("Search cancelled user is currently typing")
             } catch {
                 print("Search failed: \(error.localizedDescription)")
@@ -55,9 +56,19 @@ class SearchViewModel: ObservableObject {
          if sections.count == 0 {
              return .empty
          } else {
-              return .done
+            return .done
          }
      }
+    
+    private func updateErrorIndicatorLoadingState(shouldGetSearchResults: Bool = false) -> LoadingType {
+        if shouldGetSearchResults {
+            /** when user is still typing, show nothing until the user stop typing  **/
+            self.shouldGetSearchResults = false
+            return .none
+        } else {
+            return .error
+        }
+    }
     
     private func stubSearchSections(query: String) -> SearchEntity {
         guard let path = Bundle.main.path(forResource: "GetSearch", ofType: "json") else {
@@ -71,13 +82,7 @@ class SearchViewModel: ObservableObject {
             $0.name?.lowercased().contains(query.lowercased()) ?? false
         }
         let entity = SearchEntity(sections: searchResult)
-        
-        if search?.sections?.count ?? 0 == 0 {
-            searchLoadingType = .empty
-        } else {
-            searchLoadingType = .done
-        }
-        
+        searchLoadingType = updateSearchLoadingState(entity.sections ?? [])
         return entity
     }
 }
