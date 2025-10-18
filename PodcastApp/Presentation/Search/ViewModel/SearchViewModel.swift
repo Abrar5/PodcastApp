@@ -12,10 +12,10 @@ class SearchViewModel: ObservableObject {
     @Published var searchLoadingType: LoadingType = .none
     @Published var search: SearchEntity?
     @Published private var searchTask: Task<Void, Never>? = nil
-  
+    
     private var shouldGetSearchResults: Bool = false
     private let debounceTime: UInt64 = 200_000_000
-        
+    
     func getSearch(query: String) async {
         searchLoadingType = .loading
         do {
@@ -36,7 +36,7 @@ class SearchViewModel: ObservableObject {
         guard !query.isEmpty else {
             return
         }
-
+        
         searchTask = Task {
             do {
                 try await Task.sleep(nanoseconds: debounceTime)
@@ -51,16 +51,16 @@ class SearchViewModel: ObservableObject {
             }
         }
     }
-          
-    private func updateSearchLoadingState(_ sections: [SearchSectionEntity]) -> LoadingType {
-         if sections.count == 0 {
-             return .empty
-         } else {
-            return .done
-         }
-     }
     
-    private func updateErrorIndicatorLoadingState(shouldGetSearchResults: Bool = false) -> LoadingType {
+    func updateSearchLoadingState(_ sections: [SearchSectionEntity]) -> LoadingType {
+        if sections.count == 0 {
+            return .empty
+        } else {
+            return .done
+        }
+    }
+    
+    func updateErrorIndicatorLoadingState(shouldGetSearchResults: Bool = false) -> LoadingType {
         if shouldGetSearchResults {
             /** when user is still typing, show nothing until the user stop typing  **/
             self.shouldGetSearchResults = false
