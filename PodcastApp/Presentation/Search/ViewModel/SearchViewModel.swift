@@ -21,11 +21,7 @@ class SearchViewModel: ObservableObject {
             let search = try await SearchUseCase(query: query).execute()
             print("-- \(search)")
             self.search = search
-            if search.sections?.count ?? 0 == 0 {
-                searchLoadingType = .empty
-            } else {
-                searchLoadingType = .done
-            }
+            searchLoadingType = updateSearchLoadingState(search.sections ?? [])
         } catch {
             search = stubSearchSections(query: query)
             print(error.localizedDescription)
@@ -54,8 +50,16 @@ class SearchViewModel: ObservableObject {
             }
         }
     }
-            
-    func stubSearchSections(query: String) -> SearchEntity {
+          
+    private func updateSearchLoadingState(_ sections: [SearchSectionEntity]) -> LoadingType {
+         if sections.count == 0 {
+             return .empty
+         } else {
+              return .done
+         }
+     }
+    
+    private func stubSearchSections(query: String) -> SearchEntity {
         guard let path = Bundle.main.path(forResource: "GetSearch", ofType: "json") else {
             fatalError("GetSearch.json not found in bundle.")
         }
