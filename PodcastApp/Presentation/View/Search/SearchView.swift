@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @StateObject private var viewModel = SectionsViewModel()
     @State var searchText: String = ""
-
+    
     
     var body: some View {
         VStack {
@@ -20,13 +20,9 @@ struct SearchView: View {
             case .done:
                 contentView
             case .empty:
-                Text("No result found")
-                    .foregroundColor(.white)
-                    .font(AppFonts.semiBold(size: 16))
+                emptyView
             case .error:
-                Text("Something went wrong")
-                    .foregroundColor(.white)
-                    .font(AppFonts.semiBold(size: 16))
+                errorView
             default:
                 EmptyView()
             }
@@ -57,7 +53,7 @@ struct SearchView: View {
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(AppFonts.text(size: 12))
-
+                                
                                 
                                 HStack {
                                     Spacer()
@@ -80,5 +76,17 @@ struct SearchView: View {
             Spacer()
         }
         .padding([.top, .horizontal], 12)
+    }
+    
+    private var emptyView: some View {
+        Text("No result found")
+            .foregroundColor(.white)
+            .font(AppFonts.semiBold(size: 16))
+    }
+    
+    private var errorView: some View {
+        Text("Something went wrong")
+            .foregroundColor(.white)
+            .font(AppFonts.semiBold(size: 16))
     }
 }

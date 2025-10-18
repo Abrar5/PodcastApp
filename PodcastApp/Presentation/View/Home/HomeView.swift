@@ -16,15 +16,9 @@ struct HomeView: View {
             case .loading:
                 ProgressView()
             case .done:
-                headerView
-                filterView
-                    .padding([.top, .bottom], 16)
-                sectionsView
-                Spacer()
+                contentView
             case .empty:
-                Text("No data found")
-                    .foregroundColor(.white)
-                    .font(AppFonts.semiBold(size: 16))
+                emptyView
             default:
                 EmptyView()
             }
@@ -35,6 +29,16 @@ struct HomeView: View {
             Task {
                 await viewModel.getHomeSections()
             }
+        }
+    }
+    
+    private var contentView: some View {
+        VStack {
+            headerView
+            filterView
+                .padding([.top, .bottom], 16)
+            sectionsView
+            Spacer()
         }
     }
     
@@ -115,5 +119,11 @@ struct HomeView: View {
                 }
             }
         }
+    }
+    
+    private var emptyView: some View {
+        Text("No data found")
+            .foregroundColor(.white)
+            .font(AppFonts.semiBold(size: 16))
     }
 }
